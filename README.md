@@ -1,7 +1,7 @@
 # The Honeycomb Bakery — Website Project
 
 ## Student Information
-- Full Name: [NDIVHUWO JUNIOR MUDZIELWANA]
+- Full Name: [Ndugelo Junior Mulaudzi]
 
 ## Project Overview
 A five-page website built for The Honeycomb Bakery, a fictional family-run
