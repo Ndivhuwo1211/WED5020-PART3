@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" width="400" height="340" role="img" aria-labelledby="iconTitle iconDesc">
+    <title id="iconTitle">The Honeycomb Bakery icon</title>
+    <desc id="iconDesc">A honeycomb hexagon badge with a wheat sheaf and bee accent, without the wordmark.</desc>
+
+    <defs>
+        <linearGradient id="goldGradIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E8B33D"/>
+            <stop offset="100%" stop-color="#C98A2B"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Main hexagon badge -->
+    <polygon points="200,30 330,105 330,255 200,330 70,255 70,105"
+              fill="#FBF3E1" stroke="url(#goldGradIcon)" stroke-width="10"/>
+
+    <!-- Inner thin hexagon accent line -->
+    <polygon points="200,55 308,117 308,243 200,305 92,243 92,117"
+              fill="none" stroke="#C98A2B" stroke-width="2" opacity="0.6"/>
+
+    <!-- Wheat sheaf icon -->
+    <g transform="translate(200,182)" stroke="#7A4A21" stroke-width="4" stroke-linecap="round" fill="none">
+        <line x1="0" y1="-10" x2="0" y2="70"/>
+        <path d="M0,-10 C -14,-22 -14,-34 0,-46"/>
+        <path d="M0,8 C -18,-2 -18,-16 0,-26"/>
+        <path d="M0,26 C -20,18 -20,4 0,-6"/>
+        <path d="M0,-10 C 14,-22 14,-34 0,-46"/>
+        <path d="M0,8 C 18,-2 18,-16 0,-26"/>
+        <path d="M0,26 C 20,18 20,4 0,-6"/>
+        <g fill="#7A4A21" stroke="none">
+            <circle cx="-9" cy="-30" r="3"/>
+            <circle cx="9" cy="-30" r="3"/>
+            <circle cx="-12" cy="-13" r="3"/>
+            <circle cx="12" cy="-13" r="3"/>
+            <circle cx="-14" cy="5" r="3"/>
+            <circle cx="14" cy="5" r="3"/>
+        </g>
+    </g>
+
+    <!-- Bee accent -->
+    <g transform="translate(252,120) rotate(20)">
+        <ellipse cx="0" cy="0" rx="10" ry="7" fill="#3B2A1A"/>
+        <rect x="-6" y="-4" width="3" height="8" fill="#E8B33D"/>
+        <rect x="0" y="-4" width="3" height="8" fill="#E8B33D"/>
+        <ellipse cx="-9" cy="-6" rx="6" ry="4" fill="#FBF3E1" opacity="0.85" transform="rotate(-20 -9 -6)"/>
+        <ellipse cx="9" cy="-6" rx="6" ry="4" fill="#FBF3E1" opacity="0.85" transform="rotate(20 9 -6)"/>
+    </g>
+</svg>

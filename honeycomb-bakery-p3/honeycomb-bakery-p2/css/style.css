@@ -1,0 +1,717 @@
+/* ==========================================================================
+   THE HONEYCOMB BAKERY — STYLESHEET
+   Part 2: Designing the Visuals (CSS Styling and Responsive Design)
+
+   Structure of this file:
+   1. CSS Reset & Custom Properties (design tokens)
+   2. Base / Global Styles
+   3. Typography
+   4. Layout (header, nav, main, footer)
+   5. Section-specific layout (Flexbox / Grid)
+   6. Visual styling & interactive states (:hover, :focus, :active)
+   7. Responsive Design (breakpoints, relative units, responsive images)
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. CSS RESET & CUSTOM PROPERTIES
+   A light reset keeps default browser styling from fighting the design,
+   and CSS variables let the whole cascade share one source of truth for
+   colour and spacing — so most rules below only need one or two selectors.
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colour palette — warm bakery tones, matching the logo */
+    --color-cream: #FBF3E1;
+    --color-cream-deep: #F3E4C4;   /* alternating band colour for rhythm */
+    --color-brown: #3B2A1A;       /* primary text / dark backgrounds */
+    --color-brown-mid: #7A4A21;   /* secondary text / borders */
+    --color-gold: #C98A2B;        /* primary accent */
+    --color-gold-light: #E8B33D;  /* hover / highlight accent */
+
+    /* Type scale (rem-based so it responds to the html font-size below) */
+    --font-heading: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --step-0: 1rem;      /* body text */
+    --step-1: 1.25rem;   /* h4 / lead text */
+    --step-2: 1.75rem;   /* h3 */
+    --step-3: 2.25rem;   /* h2 */
+    --step-4: 3rem;      /* h1 */
+
+    /* Spacing scale */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.75rem;
+    --space-lg: 3rem;
+    --space-xl: 5rem;
+
+    /* Shared layout values */
+    --content-width: 68.75rem; /* 1100px equivalent container */
+    --radius: 6px;
+    --shadow: 0 6px 18px rgba(59, 42, 26, 0.12);
+}
+
+html {
+    font-size: 100%; /* 1rem = 16px by default; scaled down at mobile breakpoint below */
+    scroll-behavior: smooth;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. BASE / GLOBAL STYLES
+   -------------------------------------------------------------------------- */
+body {
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+}
+
+a {
+    color: var(--color-gold);
+    text-decoration: none;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: var(--step-0);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY
+   One heading family (serif, for warmth and craft) and one body family
+   (sans-serif, for readability), per the type-scale variables above.
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-brown);
+}
+
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); margin-bottom: var(--space-sm); }
+h3 { font-size: var(--step-2); margin-bottom: var(--space-xs); }
+h4 { font-size: var(--step-1); margin-bottom: 0.35rem; }
+
+main p {
+    max-width: 42rem; /* keeps body text under ~80 characters per line */
+    margin-bottom: var(--space-sm);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. LAYOUT — HEADER, NAVIGATION, MAIN, FOOTER
+   -------------------------------------------------------------------------- */
+header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--color-brown);
+    color: var(--color-cream);
+}
+
+header h1 {
+    color: var(--color-cream);
+    font-size: var(--step-3);
+}
+
+header p {
+    color: var(--color-gold-light);
+    font-size: 0.95rem;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--color-cream-deep);
+    border-bottom: 3px solid var(--color-gold);
+}
+
+nav a {
+    color: var(--color-brown);
+    font-weight: 600;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid transparent;
+}
+
+main {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+main section {
+    margin-bottom: var(--space-xl);
+}
+
+footer {
+    background-color: var(--color-brown);
+    color: var(--color-cream);
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+}
+
+footer p {
+    margin-bottom: var(--space-xs);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. SECTION-SPECIFIC LAYOUT (Flexbox / Grid)
+   -------------------------------------------------------------------------- */
+
+/* Homepage hero */
+#hero {
+    text-align: center;
+}
+
+#hero img {
+    width: 100%;
+    box-shadow: var(--shadow);
+    margin-bottom: var(--space-md);
+}
+
+#hero p, #cta p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Today's specials: styled as a row of pill tags rather than default bullets,
+   since these are short, scannable items rather than a sequence */
+#specials ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+#specials li {
+    background-color: var(--color-cream-deep);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+/* Call-to-action band */
+#cta {
+    background-color: var(--color-gold-light);
+    padding: var(--space-lg) var(--space-md);
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+/* Buttons: applied via .btn on the two homepage CTA links */
+.btn {
+    display: inline-block;
+    background-color: var(--color-brown);
+    color: var(--color-cream);
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius);
+    margin-top: var(--space-xs);
+}
+
+/* About page: image + text side by side on desktop */
+.story-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    align-items: flex-start;
+}
+
+.story-media {
+    flex: 1 1 20rem;
+}
+
+.story-text {
+    flex: 2 1 20rem;
+}
+
+/* Mission and vision side by side on desktop */
+.mv-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+}
+
+.mv-block {
+    flex: 1 1 16rem;
+}
+
+/* Team grid */
+#team ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+}
+
+#team li {
+    flex: 1 1 14rem;
+    max-width: 16rem;
+    text-align: center;
+}
+
+#team img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin: 0 auto var(--space-sm);
+    box-shadow: var(--shadow);
+}
+
+/* Products/menu categories: alternate band colour for visual rhythm */
+#bread, #cakes {
+    background-color: var(--color-cream-deep);
+    padding: var(--space-md);
+    border-radius: var(--radius);
+}
+
+#pastries {
+    padding: var(--space-md) 0;
+}
+
+#bread ul, #pastries ul, #cakes ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+#bread li, #pastries li, #cakes li {
+    flex: 1 1 14rem;
+    background-color: var(--color-cream);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+}
+
+#bread li img, #pastries li img, #cakes li img {
+    margin-bottom: var(--space-xs);
+}
+
+/* Contact page: locations side by side on desktop */
+#location-main, #location-kiosk {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    margin-right: 2%;
+}
+
+#location-main iframe, #location-kiosk iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: var(--radius);
+}
+
+/* Gallery row */
+#gallery {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+#gallery img {
+    flex: 1 1 12rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. FORMS (enquiry.html, contact.html)
+   A quieter, "letter-writing" form style — underline inputs rather than
+   heavy boxes — to match the handmade feel of the rest of the site.
+   -------------------------------------------------------------------------- */
+form {
+    max-width: 32rem;
+}
+
+fieldset {
+    border: none;
+    border-top: 1px solid var(--color-brown-mid);
+    padding-top: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+legend {
+    font-family: var(--font-heading);
+    font-size: var(--step-1);
+    padding-bottom: var(--space-xs);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: var(--space-sm);
+    margin-bottom: 0.35rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.6rem 0.25rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--color-brown-mid);
+}
+
+textarea {
+    border: 2px solid var(--color-brown-mid);
+    border-radius: var(--radius);
+    padding: var(--space-xs);
+}
+
+button[type="submit"] {
+    display: inline-block;
+    background-color: var(--color-gold);
+    color: var(--color-brown);
+    font-weight: 700;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    margin-top: var(--space-md);
+    cursor: pointer;
+}
+
+
+/* --------------------------------------------------------------------------
+   6b. INTERACTIVE STATES — :hover, :focus, :active
+   -------------------------------------------------------------------------- */
+nav a:hover,
+nav a:focus {
+    border-bottom-color: var(--color-gold);
+}
+
+nav a:active {
+    color: var(--color-gold);
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--color-gold);
+    color: var(--color-brown);
+}
+
+.btn:active {
+    background-color: var(--color-gold-light);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: var(--color-gold-light);
+}
+
+button[type="submit"]:active {
+    background-color: var(--color-brown-mid);
+    color: var(--color-cream);
+}
+
+#team img:hover {
+    box-shadow: 0 10px 24px rgba(59, 42, 26, 0.22);
+}
+
+/* Footer social icons: layout rule carried over from Part 1, plus colour
+   and hover state now that full styling is in place */
+#social-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+#social-links a {
+    color: var(--color-cream);
+    display: inline-flex;
+}
+
+#social-links a:hover,
+#social-links a:focus {
+    color: var(--color-gold-light);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVE DESIGN
+   Breakpoints: >900px desktop (styles above), 601–900px tablet,
+   ≤600px mobile. Font sizes and spacing already use rem/% so most of the
+   work here is re-flowing the grid layouts to fewer columns per row.
+   -------------------------------------------------------------------------- */
+
+/* ---- Tablet: 900px and below ---- */
+@media (max-width: 900px) {
+    main {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .story-media, .story-text {
+        flex-basis: 100%; /* image stacks above text */
+    }
+
+    #team li,
+    #bread li, #pastries li, #cakes li {
+        flex-basis: 45%; /* 3 columns -> roughly 2 */
+    }
+
+    #location-main, #location-kiosk {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: var(--space-md);
+    }
+}
+
+/* ---- Mobile: 600px and below ---- */
+@media (max-width: 600px) {
+    html {
+        font-size: 93.75%; /* ~15px base, scales every rem value down slightly */
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-md);
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-sm);
+    }
+
+    .mv-block,
+    #team li,
+    #bread li, #pastries li, #cakes li {
+        flex-basis: 100%; /* single column on small screens */
+    }
+
+    #gallery img {
+        flex-basis: 100%;
+    }
+
+    main p {
+        max-width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   PART 3 ADDITIONS
+   8. Accessibility, interactivity, forms, search, modal, lightbox, maps
+   ========================================================================== */
+
+/* ---- Accessibility ---- */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    z-index: 100;
+    background: var(--color-brown);
+    color: var(--color-cream);
+    padding: 0.5rem 1rem;
+}
+.skip-link:focus { left: 0; }
+
+a:focus-visible, button:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--color-gold-light);
+    outline-offset: 2px;
+}
+nav a[aria-current="page"] { border-bottom-color: var(--color-gold); }
+
+/* ---- Mobile nav toggle (only shown when JavaScript is available) ---- */
+.nav-toggle { display: none; }
+
+/* ---- Animations ---- */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+.btn, button[type="submit"], .btn-small, nav a { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; }
+.btn:hover, button[type="submit"]:hover { transform: translateY(-2px); }
+
+.product-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+    .js .reveal { opacity: 1; transform: none; }
+}
+
+/* ---- Products: search / filter / sort ---- */
+#product-controls {
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: flex-end;
+    margin: var(--space-sm) 0;
+}
+#product-controls .control { flex: 1 1 12rem; }
+#product-controls label { margin-top: 0; }
+#product-count { color: var(--color-brown-mid); font-weight: 600; margin-bottom: var(--space-sm); }
+#product-results > section { margin-bottom: var(--space-lg); }
+.no-results { padding: var(--space-md); background: var(--color-cream-deep); border-radius: var(--radius); }
+
+.btn-small {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    background: var(--color-brown);
+    color: var(--color-cream);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-small:hover, .btn-small:focus { background: var(--color-gold); color: var(--color-brown); }
+
+/* ---- Modal & lightbox (native <dialog>) ---- */
+dialog.modal {
+    border: none;
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    width: min(34rem, 92vw);
+    background: var(--color-cream);
+    color: var(--color-brown);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    margin: auto;
+}
+dialog.modal::backdrop { background: rgba(59, 42, 26, 0.75); }
+dialog.modal img { width: 100%; margin-bottom: var(--space-sm); }
+dialog.modal p { margin-bottom: var(--space-xs); }
+.dialog-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+}
+dialog.lightbox { width: min(60rem, 96vw); background: #1b130b; color: var(--color-cream); text-align: center; }
+dialog.lightbox img { max-width: 100%; max-height: 70vh; width: auto; height: auto; margin: 0 auto var(--space-xs); object-fit: contain; }
+.lightbox-nav { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); flex-wrap: wrap; }
+.lightbox-count { min-width: 4rem; }
+
+/* ---- Gallery grid ---- */
+#gallery { display: block; }
+.gallery-hint { color: var(--color-brown-mid); }
+.gallery-grid { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.gallery-grid li { flex: 1 1 12rem; }
+.gallery-grid a { display: block; overflow: hidden; border-radius: var(--radius); }
+.gallery-grid img { width: 100%; transition: transform 0.3s ease; cursor: zoom-in; }
+.gallery-grid a:hover img, .gallery-grid a:focus img { transform: scale(1.05); }
+
+/* ---- Maps ---- */
+.map { width: 100%; height: 300px; border-radius: var(--radius); z-index: 0; background: var(--color-cream-deep); }
+.map-fallback { padding: var(--space-md); }
+
+/* ---- Accordion ---- */
+.accordion { max-width: 42rem; margin-top: var(--space-sm); }
+.accordion h3 { margin: 0; font-size: var(--step-1); }
+.accordion-trigger {
+    width: 100%;
+    text-align: left;
+    background: var(--color-cream-deep);
+    color: var(--color-brown);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius);
+    padding: 0.85rem 2.5rem 0.85rem 1rem;
+    font: inherit;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    margin-top: var(--space-xs);
+}
+.accordion-trigger::after { content: "+"; position: absolute; right: 1rem; font-size: 1.4rem; line-height: 1; }
+.accordion-trigger[aria-expanded="true"]::after { content: "\2212"; }
+.accordion-trigger:hover { background: var(--color-gold-light); }
+.accordion-panel { padding: var(--space-sm); border: 1px solid var(--color-gold); border-top: none; border-radius: 0 0 var(--radius) var(--radius); }
+.accordion-panel p { margin-bottom: 0; }
+
+/* ---- Forms: validation, choices, results ---- */
+.error { display: block; color: #9b1c1c; font-size: 0.9rem; min-height: 1.25em; margin-top: 0.2rem; }
+input.invalid, select.invalid, textarea.invalid { border-color: #9b1c1c; }
+.hint { font-weight: 400; color: var(--color-brown-mid); font-size: 0.9rem; }
+
+.choice { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; margin-top: 0.4rem; }
+.choice input { width: auto; accent-color: var(--color-gold); }
+
+select { cursor: pointer; }
+
+.form-result {
+    max-width: 32rem;
+    margin-top: var(--space-sm);
+    border-radius: var(--radius);
+}
+.form-result:not(:empty) { padding: var(--space-sm); background: var(--color-cream-deep); border-left: 5px solid var(--color-gold); }
+.form-result.ok:not(:empty) { border-left-color: #2f7d32; }
+.form-result.warn:not(:empty) { border-left-color: #c77700; }
+.form-result.error-box:not(:empty) { border-left-color: #9b1c1c; color: #9b1c1c; font-weight: 600; }
+.form-result ul { list-style: disc; padding-left: 1.25rem; margin-bottom: var(--space-sm); }
+.estimate { font-size: var(--step-1); }
+.email-preview {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--color-cream);
+    border: 1px dashed var(--color-brown-mid);
+    border-radius: var(--radius);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+/* ---- Responsive additions ---- */
+@media (max-width: 600px) {
+    .js .nav-toggle {
+        display: block;
+        width: 100%;
+        background: var(--color-cream-deep);
+        color: var(--color-brown);
+        border: none;
+        border-bottom: 3px solid var(--color-gold);
+        padding: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .js body > nav ul { display: none; border-top: none; }
+    .js body > nav ul.open { display: flex; }
+    .map { height: 250px; }
+}

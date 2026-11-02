@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact & Store Hours | The Honeycomb Bakery Rosewood</title>
+    <meta name="description" content="Find The Honeycomb Bakery on the map: our Rosewood main store and Riverside Farmers Market kiosk. See opening hours, call us or send a message.">
+    <meta name="keywords" content="contact Honeycomb Bakery, bakery opening hours, Rosewood bakery location, Riverside Farmers Market, bakery phone number">
+    <meta name="author" content="The Honeycomb Bakery">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#3B2A1A">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="canonical" href="https://honeycombbakery.netlify.app/contact.html">
+    <link rel="icon" href="images/logo-icon.svg" type="image/svg+xml">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Honeycomb Bakery">
+    <meta property="og:title" content="Contact & Store Hours | The Honeycomb Bakery Rosewood">
+    <meta property="og:description" content="Find The Honeycomb Bakery on the map: our Rosewood main store and Riverside Farmers Market kiosk. See opening hours, call us or send a message.">
+    <meta property="og:url" content="https://honeycombbakery.netlify.app/contact.html">
+    <meta property="og:image" content="https://honeycombbakery.netlify.app/images/hero-bakery.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header>
+        <img src="images/logo-icon.svg" alt="The Honeycomb Bakery logo" width="60" height="60">
+        <h1>The Honeycomb Bakery</h1>
+        <p>Handcrafted bread, pastries &amp; celebration cakes</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="enquiry.html">Custom Orders</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main id="main">
+
+        <h2>Visit or Contact Us</h2>
+
+        <!-- Location 1: main store -->
+        <section id="location-main">
+            <h3>Main Store &mdash; Rosewood</h3>
+            <p>123 Main Road, Rosewood, 2196</p>
+            <p>Open Tuesday &ndash; Sunday, 07:00 &ndash; 16:00 (closed Mondays)</p>
+            <p>Phone: <a href="tel:+27115550192">(011) 555-0192</a></p>
+            <!-- Interactive Leaflet map (initialised in js/main.js) -->
+            <div id="map-main" class="map" role="region" aria-label="Interactive map showing The Honeycomb Bakery main store in Rosewood"></div>
+            <noscript><p><a href="https://www.openstreetmap.org/search?query=Rosewood%20Johannesburg" target="_blank" rel="noopener noreferrer">View Rosewood on OpenStreetMap</a></p></noscript>
+        </section>
+
+        <!-- Location 2: weekend market kiosk -->
+        <section id="location-kiosk">
+            <h3>Weekend Kiosk &mdash; Riverside Farmers Market</h3>
+            <p>Riverside Farmers Market, 4 Market Lane, Riverside, 2194</p>
+            <p>Open Saturday &amp; Sunday, 08:00 &ndash; 13:00</p>
+            <p>Phone: <a href="tel:+27115550192">(011) 555-0192</a></p>
+            <div id="map-kiosk" class="map" role="region" aria-label="Interactive map showing The Honeycomb Bakery weekend kiosk at Riverside Farmers Market"></div>
+            <noscript><p><a href="https://www.openstreetmap.org/search?query=Riverside%20Johannesburg" target="_blank" rel="noopener noreferrer">View Riverside on OpenStreetMap</a></p></noscript>
+        </section>
+
+        <!-- General contact form -->
+        <section id="contact-form">
+            <h3>Send Us a Message</h3>
+            <form action="#" method="post" novalidate>
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" name="contact-name" data-validate="name" autocomplete="name" required aria-describedby="contact-name-error">
+                <span class="error" id="contact-name-error" aria-live="polite"></span>
+
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="contact-email" data-validate="email" autocomplete="email" required aria-describedby="contact-email-error">
+                <span class="error" id="contact-email-error" aria-live="polite"></span>
+
+                <label for="contact-phone">Phone Number <span class="hint">(optional)</span></label>
+                <input type="tel" id="contact-phone" name="contact-phone" data-validate="phone" autocomplete="tel" aria-describedby="contact-phone-error">
+                <span class="error" id="contact-phone-error" aria-live="polite"></span>
+
+                <label for="contact-type">Type of Message</label>
+                <select id="contact-type" name="contact-type" required aria-describedby="contact-type-error">
+                    <option value="">Select a message type</option>
+                    <option value="General question">General question</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Complaint">Complaint</option>
+                    <option value="Partnership or press">Partnership or press</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span class="error" id="contact-type-error" aria-live="polite"></span>
+
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="contact-message" rows="6" data-validate="message" required aria-describedby="contact-message-error"></textarea>
+                <span class="error" id="contact-message-error" aria-live="polite"></span>
+
+                <button type="submit">Prepare Email</button>
+            </form>
+            <div id="contact-result" class="form-result" role="status" aria-live="polite"></div>
+        </section>
+
+        <!-- Photo gallery with lightbox -->
+        <section id="gallery">
+            <h3>From Our Bakery</h3>
+            <p class="gallery-hint">Select a photo to view it larger.</p>
+            <ul class="gallery-grid">
+                <li><a href="images/gallery-fresh-loaves.jpg" data-lightbox data-caption="Freshly baked loaves cooling on a rack"><img src="images/gallery-fresh-loaves.jpg" alt="Freshly baked loaves cooling on a rack" width="400" height="300" loading="lazy"></a></li>
+                <li><a href="images/gallery-celebration-cake.jpg" data-lightbox data-caption="Decorated celebration cake on display"><img src="images/gallery-celebration-cake.jpg" alt="Decorated celebration cake on display" width="400" height="300" loading="lazy"></a></li>
+                <li><a href="images/gallery-pastry-display.jpg" data-lightbox data-caption="Assorted pastries in the bakery display case"><img src="images/gallery-pastry-display.jpg" alt="Assorted pastries in the bakery display case" width="400" height="300" loading="lazy"></a></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 The Honeycomb Bakery. All rights reserved.</p>
+        <p>123 Main Road, Rosewood &nbsp;|&nbsp; (011) 555-0192</p>
+        <!-- Social media links: real, working hrefs opening each platform in a new tab -->
+        <nav aria-label="Social media">
+            <ul id="social-links">
+                <li>
+                    <a href="https://www.facebook.com/HoneycombBakery" target="_blank" rel="noopener noreferrer" aria-label="The Honeycomb Bakery on Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" role="img">
+                            <path d="M22 12.06C22 6.505 17.523 2 12 2S2 6.505 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.875h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/honeycombbakery" target="_blank" rel="noopener noreferrer" aria-label="The Honeycomb Bakery on Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" role="img">
+                            <path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43A4.9 4.9 0 0 1 3.82 3 4.9 4.9 0 0 1 5.59 1.85c.46-.16 1.26-.35 2.43-.4C9.29 1.4 9.67 1.39 12 1.39zm0 1.8c-3.16 0-3.5.01-4.74.07-1.03.05-1.6.22-1.97.36-.5.19-.85.42-1.22.79-.37.37-.6.72-.79 1.22-.14.37-.31.94-.36 1.97-.06 1.24-.07 1.58-.07 4.74s.01 3.5.07 4.74c.05 1.03.22 1.6.36 1.97.19.5.42.85.79 1.22.37.37.72.6 1.22.79.37.14.94.31 1.97.36 1.24.06 1.58.07 4.74.07s3.5-.01 4.74-.07c1.03-.05 1.6-.22 1.97-.36.5-.19.85-.42 1.22-.79.37-.37.6-.72.79-1.22.14-.37.31-.94.36-1.97.06-1.24.07-1.58.07-4.74s-.01-3.5-.07-4.74c-.05-1.03-.22-1.6-.36-1.97a3.1 3.1 0 0 0-.79-1.22 3.1 3.1 0 0 0-1.22-.79c-.37-.14-.94-.31-1.97-.36C15.5 4.01 15.16 4 12 4zm0 3.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 1.8a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm4.85-2a1.08 1.08 0 1 1 0 2.16 1.08 1.08 0 0 1 0-2.16z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/honeycombbakery" target="_blank" rel="noopener noreferrer" aria-label="The Honeycomb Bakery on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" role="img">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.29 3.9A12.14 12.14 0 0 1 3.15 4.7a4.28 4.28 0 0 0 1.32 5.71 4.26 4.26 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.2 4.3 4.3 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.97A8.58 8.58 0 0 1 2 18.57a12.1 12.1 0 0 0 6.56 1.92c7.87 0 12.18-6.52 12.18-12.18 0-.19 0-.37-.01-.56A8.7 8.7 0 0 0 22.46 6z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+    <script src="js/main.js" defer></script>
+
+</body>
+</html>
